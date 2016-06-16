@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<% include("../common/header.html"){} %>
+</head>
+<body>
+  <header class="navbar navbar-static-top" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header" style="text-align: center;">
+      <a href="/" class="navbar-brand">小木学堂JFinal课程案例-用户管理之快速实现CURD</a>
+    </div>
+  </div>
+</header>
+<div id="main" class="container">
+  <div class="row">
+   <div class="col-lg-6 col-ms-6 col-sm-6">
+   <form action="${isEmpty(user)?'/user/submit':'/user/update'}"  method="post">
+   <input type="hidden" name="user.id" value="${user.id!''}">
+   	<div class="form-group">
+   	<label>姓名</label>
+   	<input name="user.username" value="${user.username!''}" type="text" class="form-control" placeholder="请输入姓名">
+   	</div>
+   	<div class="form-group">
+   	<label>年龄</label>
+   	<input  name="user.password" value="${user.password!''}"  type="text" class="form-control" placeholder="请输入年龄">
+   	</div>
+   	<div class="form-group">
+   	<label>性别</label>
+   	<div class="radio-inline">
+   	<input type="radio"  name="user.sex"  value="1"> 男
+   	</div>
+   	<div class="radio-inline">
+   	<input type="radio"   name="user.sex"   value="2"> 女
+   	</div>
+   	</div>
+   	<div class="form-group">
+   	<label>备注</label>
+   	<textarea  name="user.email"   style="height:70px;" class="form-control" placeholder="请输入备注信息">${user.email!''}</textarea>
+   	</div>
+   	<div style="text-align: center">
+   	<button type="submit" class="btn btn-primary" style="width:120px;">提  交</button>
+   	</div>
+   </form>
+   </div>
+   </div>
+
+</div>
+
+<% include("../common/footer.html"){}%>
+
+</body>
+</html>

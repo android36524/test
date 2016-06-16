@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include("../common/header.html"){} %>
+</head>
+<body>
+<div id="main" class="container">
+    <div class="row">
+        <div class="col-lg-6 col-ms-6 col-sm-6">
+            <form action="${isEmpty(user)?'/competition/submit':'/competition/update'}"  method="post">
+                <input type="hidden" name="teststudent.id" value="${student.id!''}">
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input name="teststudent.name" value="${student.name!''}" type="text" class="form-control" placeholder="请输入姓名">
+                </div>
+                <div class="form-group">
+                    <label>学号</label>
+                    <input  name="teststudent.studentNumber" value="${student.studentNumber!''}"  type="text" class="form-control" placeholder="请输入学号">
+                </div>
+                <div class="form-group">
+                    <label>专业</label>
+                    <input  name="teststudent.major" value="${student.major!''}"  type="text" class="form-control" placeholder="请输入专业">
+                </div>
+                <div class="form-group">
+                    <label>学院</label>
+                    <input  name="teststudent.academy" value="${student.academy!''}"  type="text" class="form-control" placeholder="请输入学院">
+                </div>
+                <div class="form-group">
+                    <label>队名</label>
+                    <input  name="groupname" value="${group.gruopName!''}"   type="text" id="groupName" class="form-control" >
+                </div>
+                <%if(!isEmpty(group)){%>
+                <a href="javascript:if(confirm('确实要删除吗?'))
+           location='${ctxPath}/competition/del/${group.id}'" class="btn btn-danger btn-lg">退出当前队伍</a>
+                <%}%>
+                    <a class="btn btn-primary btn-lg" href="${ctxPath}/competition/allGruop">查看所有队伍</a>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+<script>
+//    $(function () {
+//      var  gruopName = $("#groupName").val();
+//        if (gruopName ==''){
+//            $("#groupName").val("你还没有队伍哦，赶快点击查看所有队伍寻找队伍吧");
+//        }
+//    });
+</script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+   <% include("./common/header.html"){}%>
+   <link rel="stylesheet" href="${ctxPath}/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+   <h1 ><a href="${ctxPath}/competition/register" class="text-center">中外文化大赛报名入口</a></h1>
+   <% include("./common/header.html"){}%>
+<script>
+    $(function () {
+        $("#submitForm").click(function () {
+            $.ajax({
+                url:"/ajaxTest",
+                data:{
+                    username : $("#username").val(),
+                    password : $("#password").val(),
+                },
+                type:"GET",
+                success:function(data){
+                  alert(data);
+            }
+            })
+        })
+    })
+</script>
+</body>
+</html>

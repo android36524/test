@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include("../common/header.html"){} %>
+</head>
+<body>
+<div class="container">
+    <p class="bg-info">&nbsp;</p>
+    <form class="form-horizontal" action="/competition/join" method="post">
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">姓名：</label>
+            <div class="col-sm-10">
+                <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="姓名">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword3" class="col-sm-2 control-label">学号：</label>
+            <div class="col-sm-10">
+                <input type="text" name="studentNumber" class="form-control" id="inputPassword3" placeholder="学号">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="major" class="col-sm-2 control-label">专业：</label>
+            <div class="col-sm-10">
+                <input type="text" id="major" name="major" class="form-control" placeholder="你的专业">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="xueyuan" class="col-sm-2 control-label">学院：</label>
+            <div class="col-sm-10">
+                <input type="text" id="xueyuan" name="academy" class="form-control" placeholder="你的学院">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="gruop" class="col-sm-2 control-label">队名：</label>
+            <div class="col-sm-10">
+                <input type="text" id="gruop" name="groupname" class="form-control" placeholder="你的队伍，如果还没有可以为空">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-10">
+                <button type="submit" class="btn btn-lg btn-success">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;报名吧！萌萌哒&nbsp;&nbsp;&nbsp;</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-10">
+                <a class="btn btn-primary btn-lg" href="${ctxPath}/competition/allGruop">查看所有队伍</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="number" class="col-sm-2 control-label">学号：</label>
+            <div class="col-sm-10">
+                <input type="text" id="number"  class="form-control" placeholder="请输入学号">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-10">
+                <a class="btn btn-primary btn-lg" id="getPerson" href="javascript:void(0)">录入以及查看个人信息</a>
+            </div>
+        </div>
+    </form>
+</div>
+<footer  >
+    <p>blog template<br/>
+        <small>© Copyright XXX. by ZhangWeiLun.</small>
+    </p>
+</footer>
+</body>
+<% include("../front/include/_script.html") {} %>
+<script type="text/javascript">
+    $(function(){
+        $("form").submit(function(){
+            var $form = $(this);
+            $.post($form.attr("action"), $form.serialize(), function(data){
+                if (data.code === 0) {
+                    var id = data.id;
+                    layer.msg("恭喜你，报名成功", {shift: 1});
+                    setTimeout(function(){window.location.href = "${ctxPath}/competition/detail/"+ id;}, 1500);
+                    return false;
+                } else {
+                    layer.msg(data.message, {shift: 6});
+                    return false;
+                }
+            }, "json");
+            return false;
+        });
+        $("#getPerson").click(function () {
+           var number = $("#number").val();
+            window.location.href = "${ctxPath}/competition/person/"+ number;
+        });
+    });
+</script>
+</html>

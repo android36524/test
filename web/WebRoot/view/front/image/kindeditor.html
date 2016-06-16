@@ -1,0 +1,43 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>KindEditor JFinal beetl demo</title>
+	<link rel="stylesheet" href="${ctxPath}/static/kindeditor/themes/default/default.css" />
+	<link rel="stylesheet" href="${ctxPath}/static/kindeditor/plugins/code/prettify.css" />
+	<script charset="utf-8" src="${ctxPath}/static/kindeditor/kindeditor.js"></script>
+	<script charset="utf-8" src="${ctxPath}/static/kindeditor/lang/zh_CN.js"></script>
+	<script charset="utf-8" src="${ctxPath}/static/kindeditor/plugins/code/prettify.js"></script>
+	<script>
+		KindEditor.ready(function(K) {
+			var editor1 = K.create('textarea[name="content1"]', {
+				cssPath : '${ctxPath}/static/kindeditor/plugins/code/prettify.css',
+				uploadJson : '${ctxPath}/image/upload_json',
+				fileManagerJson : '${ctxPath}/image/file_manager_json',
+				allowFileManager : true,
+				// formatUploadUrl：格式化上传后的URL，默认true，会添加上ctxPath，有问题
+				// 我们采用 renderJson时加上ctxPath
+				formatUploadUrl: false,
+				afterCreate : function() {
+					var self = this;
+					K.ctrl(document, 13, function() {
+						self.sync();
+						document.forms['example'].submit();
+					});
+					K.ctrl(self.edit.doc, 13, function() {
+						self.sync();
+						document.forms['example'].submit();
+					});
+				}
+			});
+			prettyPrint();
+		});
+	</script>
+</head>
+<body>
+	<form name="example" method="post">
+		<textarea name="content1" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;"></textarea>
+		<br />
+		<input type="submit" name="button" value="提交内容" /> (提交快捷键: Ctrl + Enter)
+	</form>
+</body>
+</html>

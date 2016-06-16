@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>注册页 如梦技术——JFinal2.0 极速开发</title>
+	<link rel="stylesheet" href="${ctxPath!}/static/select2/select2.css"/>
+	<script src="${ctxPath}/static/amazeui/assets/js/jquery.min.js"></script>
+	<script src="${ctxPath}/static/select2/select2.min.js"></script>
+</head>
+<body>
+	<input type="text" id="select2" style="width: 300px">
+</body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#select2").select2({
+		placeholder:"请输入",//文本框的提示信息
+		minimumInputLength:0,   //至少输入n个字符，才去加载数据
+		allowClear: true,  //是否允许用户清除文本信息
+		ajax:{
+			url:'${ctxPath}/test/select2_ajax',   //地址
+			dataType:'text',	//接收的数据类型
+			//contentType:'application/json',
+			data: function (term, pageNo) {	 //在查询时向服务器端传输的数据
+				term = $.trim(term);
+				return {
+					 autNumber: term, //联动查询的字符
+					 pageSize: 15, //一次性加载的数据条数
+					 pageNo:pageNo, //页码
+				}
+			},
+			results:function(data,pageNo){
+				if(data.length > 0){   //如果没有查询到数据，将会返回空串
+					var dataObj = $.parseJSON(data);  //将接收到的JSON格式的字符串转换成JSON数据
+					var more = (pageNo * 15) < dataObj.total; //用来判断是否还有更多数据可以加载
+						return {
+						results: dataObj.result, more:more
+					};
+				}else{
+					return {results:data};
+				}
+			}
+		},
+		initSelection:function(element, callback){		   //初始化，其中doName是自定义的一个属性，用来存放text的值
+			var id = $(element).val();
+			var text = $(element).attr("doName");
+			if (id != '' && text != "") {
+				 callback({id:id,text:text});
+			}
+		},
+		formatResult: formatAsText //渲染查询结果项
+	});
+});
+//格式化查询结果,将查询回来的id跟name放在两个div里并同行显示，后一个div靠右浮动
+function formatAsText(item){
+	var itemFmt ="<div style='display:inline;'>"+item.id+"</div><div style='float:right;color:#4F4F4F;display:inline'>"+item.name+"</div>"
+	return itemFmt;
+}
+</script>
+</html>

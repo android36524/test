@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include("../common/header.html"){} %>
+</head>
+<body>
+    <div id="main" class="container">
+        <a href="javascript:void(0)" id="register" >亲，你还没有报名,点击后跳转到报名页</h3></a>
+        <h3>若你已报名请点击 个人信息登入，以及查看 按钮</h3>
+    </div>
+</body>
+<script>
+    $(function () {
+           $("#register").click(function () {
+               window.location.href = "${ctxPath}/competition/register";}
+           );
+    });
+</script>
+</html>

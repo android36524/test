@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>JFinal upload Examples</title>
+	</head>
+	<body>
+		<form action="${ctxPath}/image/do_upload" method="post" enctype="multipart/form-data">
+			<p><input type="file" name="file1" /></p>
+			<p><input type="file" name="file2" /></p>
+			<p><input type="file" name="file3" /></p>
+			<button type="submit">确定</button>
+		</form>
+		<hr>
+		<form id="js_images_form" action="${ctxPath}/image/ajax_upload" method="post" enctype="multipart/form-data">
+			<p><input type="file" name="file1" /></p>
+			<button type="submit">确定</button>
+		</form>
+		<div style="width: 800px">
+			<div class="am-progress-bar" style="background-color: green; height: 10px;width: 0%"></div>
+		</div>
+	</body>
+	<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="${ctxPath}/static/front/jquery.form.js"></script>
+	<script src="${ctxPath}/static/layer/layer.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$("#js_images_form").ajaxForm({
+		    dataType: "json",
+		    beforeSend: function() {
+		        layer.load(2, {shade: 0.6, scrollbar: false});
+		        var percentVal = "0%";
+		        $('.am-progress-bar').css("width", percentVal).text(percentVal);
+		    },
+		    uploadProgress: function(event, position, total, percentComplete) {
+		        var percentVal = percentComplete + "%";
+		        $('.am-progress-bar').css("width", percentVal).text(percentVal);
+		    },
+		    success: function() {
+		        var percentVal = "100%";
+		        $('.am-progress-bar').css("width", percentVal).text(percentVal);
+		    },
+		    complete: function(xhr) {
+		        layer.closeAll('loading');
+		        var url = xhr.responseText;
+		        //iframe层-多媒体
+		        layer.open({
+		            type: 2,
+		            title: false,
+		            area: ['630px', '360px'],
+		            shade: 0.8,
+		            closeBtn: false,
+		            shadeClose: true,
+		            content: "${ctxPath}" + url
+		        });
+		    }
+		});
+	});
+	</script>
+</html>

@@ -1,0 +1,49 @@
+<% layout("_layout.html"){ %>
+<div class="admin-content">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf">
+            <strong class="am-text-primary am-text-lg">首页</strong> / <small>常用模块</small>
+        </div>
+    </div>
+    <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
+      <li><a href="#" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>新增页面<br/>2300</a></li>
+      <li><a href="#" class="am-text-warning"><span class="am-icon-btn am-icon-briefcase"></span><br/>成交订单<br/>308</a></li>
+      <li><a href="#" class="am-text-danger"><span class="am-icon-btn am-icon-recycle"></span><br/>昨日访问<br/>80082</a></li>
+      <li><a href="#" class="am-text-secondary"><span class="am-icon-btn am-icon-user-md"></span><br/>在线用户<br/>3000</a></li>
+    </ul>
+
+    <div class="am-g">
+      <div class="am-u-md-12">
+        <div class="am-panel am-panel-default">
+          <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">系统信息<span class="am-icon-chevron-down am-fr" ></span></div>
+          <div id="collapse-panel-2" class="am-in">
+            <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
+              <tbody>
+              <tr>
+                <td>操作系统</td>
+                <td>${systemPro["os.name"]!}</td>
+              </tr>
+              <tr>
+                <td>java版本</td>
+                <td>${systemPro["java.version"]!}</td>
+              </tr>
+              <tr>
+                <td>jvm名称</td>
+                <td>${systemPro["java.vm.name"]!}</td>
+              </tr>
+              <tr>
+                <td>JAVA_HOME</td>
+                <td>${systemPro["java.home"]!}</td>
+              </tr>
+              <tr>
+                <td>启动时间</td>
+                <td>${startTime!}</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<% } %>

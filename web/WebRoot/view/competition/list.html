@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <% include("../common/header.html"){} %>
+</head>
+<body>
+<header class="navbar navbar-static-top" id="top" role="banner">
+    <div class="container">
+        <div class="navbar-header" style="text-align: center;">
+            <a href="#" class="navbar-brand">全部队伍一览表</a>
+        </div>
+    </div>
+</header>
+<div id="main" class="container">
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-md-12">
+            <form action="${ctxPath}/competition/search" method="post">
+                <div class="form-group">
+                    <label for="username">搜索内容:</label>
+                    <input type="text" id="username" class="form-control" name="groupName" placeholder="请输入要搜索的队名">
+                </div>
+                <div class="row">
+                    <div class="col-sm-1"><button type="submit" class="form-control btn btn-info">搜索</button></div>
+                </div>
+            </form>
+            <%if(isEmpty(error)&&isEmpty(search)){%>
+            <table class="table table-hover table-bordered">
+                <thead>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>操作</th>
+                </thead>
+                <tbody>
+                <% for(gruop in gruops.list!){ %>
+                <tr>
+                    <td>${gruop.id }</td>
+                    <td>${gruop.gruopName }</td>
+                    <td>
+                        <a href="${ctxPath}/competition/together/${gruop.id}"
+                           class="btn btn-primary btn-sm">加入该队</a>
+                        <a href="${ctxPath}/competition/groupDetail/${gruop.id}"
+                           class="btn btn-primary btn-sm">该队详细信息</a>
+                    </td>
+                </tr>
+                <%}%>
+                </tbody>
+            </table>
+            <%}%>
+
+            <%if(!isEmpty(search)){%>
+            <table class="table table-hover table-bordered">
+                <thead>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>操作</th>
+                </thead>
+                <tbody>
+                <% for(gruop in gruops!){ %>
+                <tr>
+                    <td>${gruop.id }</td>
+                    <td>${gruop.gruopName }</td>
+                    <td>
+                        <a href="${ctxPath}/competition/together/${gruop.id}"  class="btn btn-primary btn-sm">参加该队</a>
+                    </td>
+                </tr>
+                <%}%>
+                </tbody>
+            </table>
+            <%}%>
+
+
+            <%if(isEmpty(search)){%>
+            <div>
+                <h3>总共：${gruops.totalPage}页</h3>
+            </div>
+            <li><a href="${ctxPath}/competition/allGruop/${gruops.pageNumber>1?users.pageNumber-1:1}">上一页</a> </li>
+            <input type="text" id="PageNumber">
+            <a href="javascript:void(0)" id="search" >跳转</a>
+            <li><a href="${ctxPath}/competition/allGruop/${gruops.pageNumber<gruops.totalPage?gruops.pageNumber+1:gruops.totalPage}">下一页</a> </li>
+            <%}%>
+        </div>
+    </div>
+    <a class="btn btn-primary btn-sm" href="${ctxPath}/competition/register">个人信息</a>
+</div>
+</body>
+<script>
+    $(document).ready(function () {
+        $("#search").click(function () {
+            var pageNumber = $("#PageNumber").val();
+            window.location.href = "${ctxPath}/competition/allGruop/" + pageNumber;
+        });
+
+    });
+</script>
+</html>

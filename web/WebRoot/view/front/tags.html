@@ -1,0 +1,16 @@
+均参考Beetl文档：<a href="http://ibeetl.com/guide/">http://ibeetl.com/guide/</a>
+
+<h1>2.22. 绑定变量的HTML标签</h1>
+
+<#hotBlog limit="5" order="id"; x>
+<a style="background: red;">${x.id}</a>, ${x.title} <br/>
+</#hotBlog>
+
+<h1>3.2.1. 实现Function</h1>
+自行学习
+
+<%
+	var _user = c.currentUser(request, servlet.response);
+%>
+<br/>
+${_user!}

@@ -1,0 +1,51 @@
+<% layout("_layout.html", {blogOpen:true, title:'博文管理'}){ %>
+<div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">博客</strong> / <small>文章管理</small></div>
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                <th>序号</th>
+                <th>ID</th>
+                <th>标题</th>
+                <th>内容</th>
+                <th>操作</th>
+              </tr>
+          </thead>
+          <tbody>
+            <% for(x in page.list!) { %>
+            <tr>
+              <td>${xLP.index!}</td>
+              <td>${x.id!}</td>
+              <td>${x.title!}</td>
+              <td>${x.content!}</td>
+              <td>
+                  <div class="am-btn-toolbar">
+                    <div class="am-btn-group am-btn-group-xs">
+                          <button data-action="${ctxPath}/admin/ajax/update_app/${x.id!}" class="js_del am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
+                              <span class="am-icon-recycle"></span> 更新
+                          </button>
+                          <button data-action="${ctxPath}/admin/ajax/recycle_app/${x.id!}" class="js_del am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
+                              <span class="am-icon-recycle"></span> 回收
+                          </button>
+                      </div>
+                   </div>
+              </td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+        <div class="am-cf">共 ${page.totalRow!0} 条记录
+            <div class="am-fr">
+                <% include("/common/_paginate.html", {actionUrl: ctxPath + '/admin/blogs', page: page!}){} %>
+            </div>
+        </div>
+        <hr />
+    </div>
+    </div>
+</div>
+<% } %>
