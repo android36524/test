@@ -25,6 +25,7 @@ public class Config extends JFinalConfig {
         me.setError403View("/common/404.html");
         me.setError404View("/common/404.html");
         me.setError500View("/common/404.html");
+        
     }
 
     @Override
