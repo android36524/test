@@ -28,6 +28,8 @@ public class Config extends JFinalConfig {
         
     }
 
+    
+    
     @Override
     public void configRoute(Routes me) {
         me.add(new AdminRoutes());
