@@ -10,7 +10,7 @@ public class AjaxResult {
     private int id;
 
     public int getId() {
-    	/**adas*/
+    	/**adas11*/
         return id;
         
         
